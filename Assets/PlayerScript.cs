@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
+    private Interactable X;
   public float speed = 1.5f;
     private Rigidbody2D playerRigidbody2D;
     bool trigger = false;
@@ -24,40 +27,30 @@ public class PlayerScript : MonoBehaviour
         Vector2 moveVelocity = moveInput.normalized * speed;
         playerRigidbody2D.velocity = moveVelocity;
         if(Input.GetKeyDown(KeyCode.X) && trigger) {
+            X.CallEvent();
             Debug.Log("press x");
         }
-        if (Input.GetKeyDown(KeyCode.X) && bookTrigger)
-        {
-            Debug.Log("press X for book");
-        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "key")
+        if (collision.TryGetComponent<Interactable>(out  X))
         {
-            Debug.Log("its working");
-            trigger = true;
+           // Debug.Log("Key and book are Keying");
+            trigger =true;
         }
-        if(collision.gameObject.name == "Book")
-        {
-            Debug.Log("this is a book");
-            bookTrigger = true;
-        }
+      
 
        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "key")
+        if(collision.TryGetComponent<Interactable>(out var x))
         {
             trigger = false;
         }
 
-        if (collision.gameObject.name == "Book")
-        {
-            bookTrigger = false;
-        }
 
     }
 
