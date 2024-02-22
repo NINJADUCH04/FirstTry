@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Hallway.unity
     guid: 5fbff0553d0cabc41ae0930efcbd4880
+  - enabled: 1
+    path: Assets/Scenes/ClassRoom 2.unity
+    guid: e7d7b6758bbf5064c92e064338fe52e3
   m_configObjects: {}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -11,6 +12,13 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D playerRigidbody2D;
     bool trigger = false;
     bool bookTrigger = false;
+
+    //************************************************
+    bool noteTrigger = false;
+    private Notes n;
+    private bool isHolding = false;
+    //************************************************
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,12 +38,32 @@ public class PlayerScript : MonoBehaviour
             X.CallEvent();
             Debug.Log("press x");
         }
-        
+        if(Input.GetKeyDown(KeyCode.F) && noteTrigger==true && isHolding==false)
+        {
+            n.CallEvent();
+            isHolding = true;
+            
+        }
+
+        if(Input.GetKeyDown(KeyCode.G) && isHolding == true )
+        {
+            n.DestroyEvent();
+            isHolding = false;
+        }
+
     }
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Interactable>(out  X))
+        if (collision.TryGetComponent<Notes>(out n)) 
+        {
+            Debug.Log("Press F to pick up");
+            noteTrigger = true;
+        }
+
+        
+        if (collision.TryGetComponent<Interactable>(out X))
         {
            // Debug.Log("Key and book are Keying");
             trigger =true;
@@ -51,8 +79,15 @@ public class PlayerScript : MonoBehaviour
             trigger = false;
         }
 
+        if (collision.TryGetComponent<Notes>(out n))
+        {
+            Debug.Log("press F to Drop");
+            noteTrigger = false;
+        }
+
 
     }
+    
 
 
 
