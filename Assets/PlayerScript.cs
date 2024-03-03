@@ -42,13 +42,15 @@ public class PlayerScript : MonoBehaviour
         {
             n.CallEvent();
             isHolding = true;
+            print("f press 1");
             
         }
 
-        if(Input.GetKeyDown(KeyCode.G) && isHolding == true )
+       else if(Input.GetKeyDown(KeyCode.F) && isHolding == true )
         {
             n.DestroyEvent();
             isHolding = false;
+            print("f press 2");
         }
 
     }
