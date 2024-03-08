@@ -42,7 +42,6 @@ public class PlayerScript : MonoBehaviour
         {
             n.CallEvent();
             isHolding = true;
-            print("f press 1");
             
         }
 
@@ -50,7 +49,6 @@ public class PlayerScript : MonoBehaviour
         {
             n.DestroyEvent();
             isHolding = false;
-            print("f press 2");
         }
 
     }
