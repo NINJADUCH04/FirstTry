@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Notes : MonoBehaviour
 {
-    
+    public UnityEvent OnDestroy;
     public UnityEvent OnInteract;
     public GameObject Note;
     public GameObject player;
@@ -31,11 +31,13 @@ public class Notes : MonoBehaviour
    
     public void CallEvent()
     {
-       
-        OnInteract.Invoke();
-
+        Note.transform.parent = player.transform;
     }
-    
+
+
 
    
+
+
+
 }
